@@ -1,0 +1,34 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+
+{# Macro permettant la génération du pavé HTML de présentation d'un article #}
+{% macro create(id,photo,puht,tva,stock,type_id,type_libelle,designation,description) %}
+<div class="article">
+    <div class="visuel_article"><img src="{{photo}}"/>
+        {%if stock==0%}
+            <div class="stock_article">Epuisé</div>
+        {% else %}
+            <div class="prix_article">
+                {% if puht==0 %}
+                    Gratuit !
+                {% else %}
+                    {{(puht*tva)|number_format(2, ',', ' ')}} €
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="type_article article_type{{type_id}}">{{type_libelle|upper}}</div>
+    </div>
+    <div class="titre_article">{{designation}}</div>
+    <div class="detail_article">{{description}}</div>
+    <div class="ajouter_article"><button id="ajout_article_{{id}}" class="button ajouterPanier" {% if stock==0 %}disabled="disabled"{% endif %}><i class="add_icon"></i>Ajouter</button></div>
+</div>
+{% endmacro %}
+
+

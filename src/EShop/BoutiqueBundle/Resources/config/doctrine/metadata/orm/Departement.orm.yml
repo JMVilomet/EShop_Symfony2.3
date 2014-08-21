@@ -1,0 +1,41 @@
+Departement:
+    type: entity
+    table: departement
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numero:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+        departement:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: Departement
+        prefecture:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: Prefecture
+        region:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: Region
+    lifecycleCallbacks: {  }

@@ -1,0 +1,21 @@
+# Première page du catalogue, fait office d'accueil
+e_shop_boutique_accueil:
+    path:     /
+    defaults: { _controller: EShopBoutiqueBundle:Default:catalogue, page:"1" }
+
+# Enième page du catalogue
+e_shop_boutique_page:
+    path:     /page/{page}
+    defaults: { _controller: EShopBoutiqueBundle:Default:catalogue  }
+    requirements:
+        page: \d+
+
+# Page commander
+e_shop_boutique_commander:
+    path:     /commander
+    defaults: { _controller: EShopBoutiqueBundle:Default:commander, _locale:fr }
+
+# Redirection vers l'accueil avec vidage du panier    
+e_shop_boutique_retourAccueil:
+    path:     /retourAccueil
+    defaults: { _controller: EShopBoutiqueBundle:Default:retourAccueil }    

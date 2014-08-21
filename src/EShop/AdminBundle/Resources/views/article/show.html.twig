@@ -1,0 +1,53 @@
+{% extends '::base.admin.html.twig' %}
+
+{% block title %}{{parent()}} - Admin{% endblock %}
+{% block context %}{{parent()}} - Admin{% endblock %}
+
+{% block content -%}
+    <div id="content" class="col-md-12">
+    <h3>Visualisation de fiche article</h3>
+    <table class="table record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ entity.designation }}</td>
+            </tr>
+            <tr>
+                <th>Puht</th>
+                <td>{{ entity.puht }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ entity.stock }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ entity.photo }}"/></td>
+            </tr>
+            <tr>
+                <th>Enligne</th>
+                <td>{%if entity.enligne %}Oui{%else%}Non{%endif%}</td>
+            </tr>
+            <tr>
+                <th>Date_ajout</th>
+                <td>{% if entity.dateajout %}{{ entity.dateajout|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>        
+        <a href="{{ path('article') }}" class="button buttonBig">Retour à la liste</a>
+        - 
+        <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="button buttonBig">Editer</a>
+        <br/>
+        {{ form(delete_form) }}
+    </p>
+    </div>
+{% endblock %}

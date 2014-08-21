@@ -1,0 +1,109 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+{% extends "::base.html.twig" %}
+{% import 'EShopBoutiqueBundle:Default:article.macro.html.twig' as article %}
+
+{% block title %}{{parent()}} - Nos articles{% endblock %}
+
+{# Affichage d'une popin modale le cas échéant et ajout d'un écouteur sur le click du bouton commander #}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    $(document).ready(function(){
+        $('#vuePanier').click(function(){window.location.href='{{path('e_shop_boutique_commander')}}'});
+        {% if montreAlerte %}
+        $('#defaultModal').modal();
+        {% endif %}
+    });
+    </script>
+{% endblock %}
+
+{# Contenu de la popin modale #}
+{% block modalMessage %}
+<p>Ceci est un exemple rudimentaire de boutique en ligne.<br/> Cette version a été réalisée à l'aide
+    du framework Symfony v2.3, de BootStrap et de jQuery. </p>
+<p>Au niveau technique, cette application a pour but de mettre en pratique l'utilisation de Symfony et de divers composants notamment Doctrine, Twig et le bundle FOSUser.</p>
+<p>Il a aussi été fait usage de techniques plus générales comme l'utilisation de cookie, de session et de formulaires dans un but d'exercice pour élargir 
+    ma connaissance du framework. </p>
+<p>Les sources sont disponibles au lien en bas de page.</p>
+{% endblock %}    
+
+{% block content %}
+    <div id="content" class="col-xs-12 col-md-8 col-lg-9">
+        {# Contenu #}
+        <h2>Bienvenue sur <span class="txtLogo">EShop</span> !</h2>
+        {% if produits is empty %}
+            <p>Aucun article disponible pour le moment.</p>
+        {% else %}
+            <p class="splashTitle">Notre catalogue:</p>
+            {% for produit in produits %}
+                {{ article.create(
+                        produit.id,
+                        produit.photo,
+                        produit.puht,
+                        tva,produit.stock,
+                        produit.categorie.id,
+                        produit.categorie.libelle,
+                        produit.designation,
+                        produit.description
+                    ) }}
+            {% endfor %}
+            {# affichage de la navigation de pages #}
+            <p class="pageNav">
+                {%if precedente<page%}
+                <a href="{{path('e_shop_boutique_page',{"page":precedente})}}" ><<<</a>&nbsp;
+                {% endif %}
+                {%if suivante!=precedente%}{{page}}/{{derniere}}{% endif %}
+                {%if suivante>page%}
+                &nbsp;<a href="{{path('e_shop_boutique_page',{"page":suivante})}}" >>>></a>
+                {% endif %}
+                
+            </p>
+        {% endif %}
+    </div>
+    <div id="rightSidebar" class="col-xs-12 col-md-4 col-lg-3 pull-right">
+        <div class="row">
+            {# Panier #}
+            <div id="shoppingCart" class="col-md-12">
+                {% include 'EShopBoutiqueBundle:Default:panier.include.html.twig'%}
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 col-lg-4"><button class="button" data-toggle="collapse" data-target="#orderList"><i class="view_icon"></i>Voir&nbsp;le&nbsp;panier</button></div>
+                    <div class="col-xs-12 col-md-6 col-lg-4"><button id="vuePanier" class="button"><i class="order_icon"></i>Commander</button></div>
+                    <div class="col-xs-12 col-md-12 col-lg-4"><p class="orderTotal">Total&nbsp;: <span id="total">{{panier_total|number_format(2, ',', ' ')}}</span>&nbsp;€&nbsp;TTC</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {# Dernier Article #}
+            <div id="lastArticle" class="col-md-12">
+                <p class="importantText">Notre dernier ajout :</p>
+                {% if nouveau_produit is not empty %}
+                {{ article.create(
+                        nouveau_produit.id,
+                        nouveau_produit.photo,
+                        nouveau_produit.puht,
+                        tva,
+                        nouveau_produit.stock,
+                        nouveau_produit.categorie.id,
+                        nouveau_produit.categorie.libelle,
+                        nouveau_produit.designation,
+                        nouveau_produit.description
+                    ) }}
+                {% else %}
+                    <p>Aucun article pour l'instant</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

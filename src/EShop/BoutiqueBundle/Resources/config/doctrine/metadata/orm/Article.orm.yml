@@ -1,0 +1,77 @@
+Article:
+    type: entity
+    table: article
+    indexes:
+        IDX_23A0E66BCF5E72D:
+            columns:
+                - categorie_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        designation:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        puht:
+            type: decimal
+            nullable: false
+            precision: 9
+            scale: 2
+            comment: ''
+        lot:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        stock:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        description:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        photo:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        cab:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        enligne:
+            type: boolean
+            nullable: false
+            comment: ''
+        dateAjout:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: date_ajout
+    manyToOne:
+        categorie:
+            targetEntity: Categorie
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categorie_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

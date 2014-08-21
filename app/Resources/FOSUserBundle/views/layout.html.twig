@@ -1,0 +1,21 @@
+{% extends "::base.admin.html.twig" %}
+{% block title %}{{parent()}} - Admin{% endblock %}
+{% block context %}{{parent()}} - Admin{% endblock %}
+{% block content %}
+    <div id="content" class="col-md-12">
+    <h3>Identification</h3>
+        <div> Login / Mot de passe : admin / admin</div>
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <br/>
+        <div style="width:200px;padding:20px">
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+            <br/>
+        </div>
+{% endblock %}

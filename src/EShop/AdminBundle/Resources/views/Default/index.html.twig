@@ -1,0 +1,39 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+
+{% extends '::base.admin.html.twig' %}
+
+{% block title %}{{parent()}} - Admin{% endblock %}
+{% block context %}{{parent()}} - Admin{% endblock %}
+
+{% block content -%}
+    <div id="content" class="col-md-12">
+    <h3>Panneau d'administration</h3>
+    <br/><br/><br/>
+    <ul>
+        <li>
+            <td>Gérer le contenu du <a href="{{ path('article') }}" class="button buttonBig">catalogue</a></td>
+        </li>
+    </ul>
+    <br/>
+    <ul>
+        <li>
+            <td>Gérer la liste des <a href="{{ path('e_shop_admin_commande') }}" class="button buttonBig">commandes</a></td>
+        </li>
+    </ul>
+    <br/>
+    <ul>
+        <li>
+            <td>Se déconnecter et retourner à la <a href="{{ path('fos_user_security_logout') }}" class="button buttonBig">boutique</a></td>
+        </li>
+    </ul>
+    <br/>
+        
+{% endblock %}

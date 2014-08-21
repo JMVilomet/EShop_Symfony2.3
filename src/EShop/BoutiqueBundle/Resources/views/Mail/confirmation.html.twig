@@ -1,0 +1,34 @@
+{# Version HTML de l'email #}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EShop - commande</title>
+</head>
+<body bgcolor="#2280ce" align="center">
+	<img src="{{cid}}"/><br/>
+	<table width="600">
+    <tr>
+    <td bgcolor="#ffffff" style="padding:20px">
+    <span style="font:11px Verdana, Geneva, sans-serif">
+    <b>Cher {{prenom}} {{nom}},</b><br/>
+<br/>
+Nous vous remercions de votre confiance et vous confirmons que votre 
+commande <font color=red>n°{{reference}}</font> sera très prochainement traitée.<br/>
+<br/>
+Voici le détail de votre commande :<br/><br/>
+<table>
+    <tr><td style="font:bold 11px Verdana, Geneva, sans-serif">Désignation</td><td>&nbsp;</td><td style="font:bold 11px Verdana, Geneva, sans-serif">Quantité</td></tr>
+{% for ligne in panier %}
+    <tr>
+        <td style="font:11px Verdana, Geneva, sans-serif">{{ligne.designation}}</td>
+        <td>&nbsp;</td>
+        <td style="font:10px Verdana, Geneva, sans-serif">{{ligne.quantite}} unité{% if ligne.quantite>1%}s{%endif%}</td>
+    </tr>
+{% endfor %}
+</table>
+</span>
+    </td>
+    </tr>
+    </table>
+</body>
+</html>

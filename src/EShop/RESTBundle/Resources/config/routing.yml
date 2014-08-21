@@ -1,0 +1,18 @@
+# Ajout dans le panier
+e_shop_rest_creer:
+    path:     /panier/creer
+    defaults: { _controller: EShopRESTBundle:Panier:creer, _format:json}
+    methods: POST|GET
+
+# Modification d'une quantité
+e_shop_rest_changer:
+    path:     /panier/changer
+    defaults: { _controller: EShopRESTBundle:Panier:changer, _format:json}
+    methods: POST
+
+# Suppression dans le panier
+e_shop_rest_supprimer:
+    path:     /panier/supprimer
+    defaults: { _controller: EShopRESTBundle:Panier:supprimer, _format:json}
+    methods: POST
+    

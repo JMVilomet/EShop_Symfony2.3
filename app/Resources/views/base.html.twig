@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}EShop{% endblock %}</title>
+        {% block stylesheets %}
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{asset("/bundles/eshopboutique/css/style.css")}}" rel="stylesheet" type="text/css">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="{{asset('/bundles/eshopboutique/js/script.js')}}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="container">
+                <div id="frame" class="row">
+                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {# logo #}
+                                    <h1>{% block context %}<span class="txtLogo">EShop</span>{% endblock %}</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        {# contenu #}
+                                        {% block content %}{% endblock %}
+                                    </div>
+                                </div>    
+                            </div>
+                            <div class="row">
+                                <div id="footer" class="col-md-12">
+                                    {% block footer %}
+                                    Les sources de la boutique <span class="txtLogo">EShop</span> sont disponible à l'adresse <a href="https://github.com/JMVilomet/EShop_Symfony2.3">https://github.com/JMVilomet/EShop_Symfony2.3</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    -
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{{path('e_shop_admin_homepage')}}">Aller vers le back-office</a>
+                                    ({% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} 
+                                    {% else %}
+                                        Déconnecté
+                                    {% endif %})
+                                    {% endblock %}    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Information</h4>
+                        </div>
+                        <div class="modal-body">
+                        {% block modalMessage %}{% endblock %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                </div>
+              </div>
+            </div>
+        {% endblock %}
+    </body>
+</html>
+

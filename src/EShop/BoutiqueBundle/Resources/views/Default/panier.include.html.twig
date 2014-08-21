@@ -1,0 +1,106 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+
+{# Fichier include qui contient l'affichage du contenu du panier et le JS gérant #}
+{# les requêtes AJAX lors des clics sur les boutons "ajouter","plus","moins" et "supprimer" du panier #}
+<script>
+    function creer(){
+        id = extract_id($(this).attr('id'));
+        if (id!=0){
+            selecteur = "#ligne_"+id;
+            $.ajax({
+                type: 'POST',
+                url:'{{path('e_shop_rest_creer')}}',
+                data:{id:id},
+                success:function(retour){
+                    location.reload();
+                }
+            });
+        }
+        return false;
+    }
+
+    function ajouter(){
+        id = extract_id($(this).parent().parent().attr('id'));
+        if (id!=0){
+            selecteur = "#ligne_"+id;
+            nouvelleQuantite = parseInt($(selecteur+" .quantite").html())+1;
+            $.ajax({
+                type: 'POST',
+                url:'{{path('e_shop_rest_changer')}}',
+                data:{id:id,quantite:nouvelleQuantite},
+                success:function(retour){
+                    $("#total").html(retour[0]);
+                    $(selecteur+" .quantite").html(retour[1]);
+                }
+            });
+        }
+        return false;
+    }
+
+    function enlever(){
+        id = extract_id($(this).parent().parent().attr('id'));
+        if (id!=0){
+            selecteur = "#ligne_"+id;
+            nouvelleQuantite = parseInt($(selecteur+" .quantite").html())-1;
+            if (nouvelleQuantite>0){
+                $.ajax({
+                    type: 'POST',
+                    url:'{{path('e_shop_rest_changer')}}',
+                    data:{id:id,quantite:nouvelleQuantite},
+                    success:function(retour){
+                        $("#total").html(retour[0]);
+                        $(selecteur+" .quantite").html(retour[1]);
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+    function retirer(){
+        id = extract_id($(this).parent().parent().attr('id'));
+        if (id!=0){
+            selecteur = "#ligne_"+id;
+            $.ajax({
+                type: 'POST',
+                url:'{{path('e_shop_rest_supprimer')}}',
+                data:{id:id},
+                success:function(retour){
+                    $("#total").html(retour[0]);
+                    $(selecteur).remove();
+                    if($(".lignePanier").length==0){
+                        $("#panierVide").show();
+                    };
+                }
+            });
+        }
+        return false;
+    }
+</script>
+    <div class="row">
+        <div id="orderList" class="col-md-12 collapse {% if panier_visible is defined %}in{% endif %}">
+            <table class="table table-condensed">
+                <tr><td>Titre</td><td>Quantité</td><td></td><td>Prix HT</td><td>Enlever</td></tr>
+                    <tr id="panierVide" {% if panier is not empty %}style="display:none"{% endif %}>
+                        <td colspan="5">Votre panier est vide .</td>
+                    </tr>
+                    {% for id,ligne in panier %}
+                    <tr id="ligne_{{id}}" class="lignePanier">
+                        <td>{{ligne.designation}}</td>
+                        <td class="quantite">{{ligne.quantite}}</td>
+                        <td><a href="" class="smlButton plusPanier">+</a>&nbsp;<a id="moins_{{id}}" href="" class="smlButton moinsPanier">-</a></td>
+                        <td class="puht">{{ligne.puht|number_format(2,',',' ')}}</td>
+                        <td><a href="" class="smlButton retirerPanier">X</a></td>
+                    </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </div>    

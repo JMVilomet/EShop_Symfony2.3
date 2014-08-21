@@ -1,0 +1,11 @@
+# tva : taux de TVA à appliquer au prix unitaire HT des articles
+# pagination : nombre d'articles par page
+parameters:
+    e_shop_boutique.tva: 1.206
+    e_shop_boutique.pagination: 3
+
+# déclaration du service Panier
+services:
+    e_shop_boutique.panier:
+        class: EShop\Service\Panier\Panier
+        arguments: [@session]

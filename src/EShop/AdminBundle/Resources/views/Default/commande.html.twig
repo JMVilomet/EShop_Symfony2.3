@@ -1,0 +1,68 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+{% extends '::base.admin.html.twig' %}
+
+{% block title %}{{parent()}} - Admin{% endblock %}
+{% block context %}{{parent()}} - Admin{% endblock %}
+
+{% block content %}
+    <div id="content" class="col-md-12">
+    <h3>Liste des commandes</h3>
+    <form id="orderForm" novalidate action="{{path('e_shop_admin_basculer')}}" method="post">
+    <div class="table-responsive">    
+    <table class="table">
+        <thead>
+            <td>Référence</td>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Email</td>
+            <td>Adresse</td>
+            <td>Date</td>
+            <td>Etat</td>
+            <td>Action</td>
+        </thead>
+    {% for commande in commandes%}    
+        <tr>
+            <td>{{commande.Id}}</td>
+            <td>{{commande.nom}}</td>
+            <td>{{commande.prenom}}</td>
+            <td>{{commande.email}}</td>
+            <td>{{commande.adresse}} - {{commande.cp}} {{commande.ville}} ({{commande.departement.departement}})</td>
+            <td>{{commande.dateCommande|date('d-m-Y H:i:s')}}</td>
+            <td>{% if commande.livree is null %}Annulée{%elseif commande.livree==1%}Traitée{%else%}En attente{% endif %}</td>
+            <td>
+                {% if commande.livree is not null %}<button type="submit" name="toggle[{{commande.Id}}]" class="button">Changer</button>{%endif%}
+                <button type="button" name="" class="button" data-toggle="collapse" data-target="#collapse{{commande.Id}}">Détail</button>
+            </td>
+        </tr>
+        <tr id="collapse{{commande.Id}}" class="collapse">
+            <td colspan="4"></td>
+            <td colspan="4">
+                <table class="table table-bordered">
+                        <tr>
+                            <td>Désignation</td>
+                            <td>Prix ut/HT</td>
+                            <td>Quantité</td>
+                        </tr>
+                    {% for panier in paniers[commande.Id] %}    
+                        <tr>
+                            <td>{{panier.article.designation}}</td>
+                            <td>{{panier.puht}}</td>
+                            <td>{{panier.quantite}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+    <p><a href="{{path('e_shop_admin_homepage')}}" class="button buttonBig">Retour à l'accueil</a></p>
+{% endblock %}

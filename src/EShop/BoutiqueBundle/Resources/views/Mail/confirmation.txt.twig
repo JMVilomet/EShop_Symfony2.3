@@ -1,0 +1,12 @@
+{# Version text de l'email #}Cher {{prenom}} {{nom}},
+
+Nous vous remercions de votre confiance et vous confirmons que votre 
+commande n°{{reference}} sera très prochainement traitée.
+
+Voici le détail de votre commande :
+{% for ligne in panier %}
+    {{ligne.designation}} : {{ligne.quantite}} unité{% if ligne.quantite>1%}s{%endif%}
+    
+{% endfor %}
+    
+

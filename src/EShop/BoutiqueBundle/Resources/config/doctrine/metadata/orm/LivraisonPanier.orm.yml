@@ -1,0 +1,51 @@
+LivraisonPanier:
+    type: entity
+    table: livraison_panier
+    indexes:
+        FK_LIVRAISON_PANIER:
+            columns:
+                - livraison_id
+        FK_LIVRAISON_ARTICLE:
+            columns:
+                - article_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        puht:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+        quantite:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    manyToOne:
+        livraison:
+            targetEntity: Livraison
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                livraison_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        article:
+            targetEntity: Article
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                article_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

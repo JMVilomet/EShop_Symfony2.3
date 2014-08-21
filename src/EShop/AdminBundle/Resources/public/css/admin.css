@@ -1,0 +1,183 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext);
+
+/* CSS du template general */
+html {
+    height: auto;
+    min-height:100%;
+}
+body {
+	padding:20px;
+	background: linear-gradient(335deg,  #999999,#d8d8d8,#cacaca,#e8e8e8);
+}
+#frame {
+	background: rgba(178, 178, 178, 0.5);
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 1% !important;
+}
+#footer {
+    color: #fff;
+    margin-top: 10px;    
+    font-size: 10px;
+    letter-spacing: 0.7px;
+}
+#footer a {
+    color: #fff;
+    margin-top: 10px;
+    text-decoration:underline;
+}
+h1{
+    color: black;
+    font-size: 63px;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 11px;
+    margin-top:0;
+}
+h2{
+    color: black;
+    font-size: 43px;
+    font-stretch: ultra-condensed;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 4px 2px rgba(14, 92, 131, 0.18);
+    text-transform: capitalize;
+}
+.importantText{
+    color: #1794d3;
+    font-size: 19px;
+    font-stretch: ultra-condensed;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 4px 2px rgba(14, 92, 131, 0.18);
+    text-transform: capitalize;
+}
+.noteText{
+    color: #1794d3;
+    font-size: 17px;
+    font-stretch: ultra-condensed;
+    margin: 20px;
+}
+
+.splashTitle{
+    color: #1794d3;
+    font-size: 22px;
+    font-stretch: ultra-condensed;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    letter-spacing: 15px;
+    margin-bottom: 21px;
+    margin-left: 41px;
+    margin-top: 41px;
+    text-decoration: underline;
+    text-shadow:  4px 2px rgba(14, 92, 131, 0.18);
+    text-transform: capitalize;
+}
+
+/* Nom de la boutique : EShop */
+.txtLogo { 
+    font-family: 'Lobster', cursive; 
+    text-shadow: 0 1.5px 1px rgba(231, 231, 231, 255), 
+                -0.75px -1.25px 1px rgba(209, 209, 209, 255),
+                0.75px -1.25px 1px rgba(170, 170, 170, 255), 
+                0px 0px 2px rgba(255, 255, 255, 255) ;
+   
+    transform: translateZ(0px);   
+    transform: rotate(-6deg);
+    display: inline-block;
+    font-variant: normal;
+    text-transform: none;    
+}
+.txtLogo:hover, .txtLogo:focus, .txtLogo:active { 
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+    animation-name: txtLogo;
+    animation-timing-function: linear;
+}
+@keyframes txtLogo {
+    10% {transform: translateX(5px) rotate(4deg);}
+    20% {transform: translateX(-5px) rotate(-4deg);}
+    30% {transform: translateX(4px) rotate(3deg);}
+    40% {transform: translateX(-4px) rotate(-3deg);}
+    50% {transform: translateX(3px) rotate(2deg);}
+    60% {transform: translateX(-3px) rotate(-2deg);}
+    70% {transform: translateX(2px) rotate(1deg);}
+    80% {transform: translateX(-2px) rotate(-3deg);}
+    90% {transform: translateX(1px) rotate(-1deg);}
+    100% {transform: translateX(-1px) rotate(-6deg);}
+}
+
+/* Boutons */
+.button{
+    background: linear-gradient(0deg, rgb(0, 20, 179) 30%, rgb(18, 87, 193) 70%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 8.10811px;
+    box-shadow: 2px 3px 4px rgba(50, 50, 50, 0.52);
+    color: rgb(230, 230, 230);
+    font-family: Arial;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 5px 5px 6px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(30, 30, 30, 0.8);
+    display:block;
+    border-width: 0;
+}
+.button:disabled {
+    background: linear-gradient(0deg, rgb(66, 66, 66) 30%, rgb(99, 99, 99) 70%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important; 
+    font-style: italic;
+    color:#888;
+}
+.button:disabled:hover {
+    color:#888;
+}
+.button:hover{
+    color: rgb(115, 115, 115);
+    text-decoration:none;
+}
+
+.buttonBig{
+    font-size: 12px !important;
+    display: inline;
+}
+
+.smlButton,.smlButton:visited{
+    background: linear-gradient(0deg, rgb(250, 39, 44) 30%, rgb(252, 175, 170) 70%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 3.108px;
+    box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.52);
+    color: rgb(255,255,255);
+    display: inline;
+    font-family: Verdana;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(30, 30, 30, 0.8);
+    white-space: nowrap;
+}
+.smlButton:hover{
+    color: rgb(115, 115, 115);
+    text-decoration:none;
+}
+
+/* Contenu et tableaux */
+#content {
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 3px 4px 2px 0px rgba(50, 50, 50, 0.71);
+	border:1px solid black;
+	border-radius: 10px;
+}
+
+.table td {
+    font-size:11px;
+}
+
+.table-responsive
+{
+    overflow-x: auto;
+}

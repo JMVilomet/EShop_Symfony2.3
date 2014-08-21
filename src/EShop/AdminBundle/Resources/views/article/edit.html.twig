@@ -1,0 +1,30 @@
+{% extends '::base.admin.html.twig' %}
+
+{% block title %}{{parent()}} - Admin{% endblock %}
+{% block context %}{{parent()}} - Admin{% endblock %}
+
+{% form_theme edit_form _self %}
+{% block form_row %}
+<div class="form-group">
+{{form_label(form)}}
+{{form_errors(form)}}
+{{form_widget(form)}}
+</div>
+{%- endblock form_row %}
+
+{% block content -%}
+    <div id="content" class="col-md-12">
+    <h3>Edition de fiche article</h3>
+
+    <table>
+        <tr>
+            <td>{{ form(edit_form) }}</td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><a href="{{ path('article') }}" class="button buttonBig">Retour à la liste</a></td>
+            <td>{{ form(delete_form) }}</td>
+        </tr>
+    </table>
+    <br/>
+{% endblock %}

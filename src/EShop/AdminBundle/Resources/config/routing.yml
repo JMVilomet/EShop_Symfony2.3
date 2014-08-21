@@ -1,0 +1,22 @@
+# Accueil de l'administration
+e_shop_admin_homepage:
+    path:     /
+    defaults: { _controller: EShopAdminBundle:Default:index }
+
+# Gestion des articles via les controlleurs CRUD de doctrine
+e_shop_admin_article:
+    resource: "@EShopAdminBundle/Resources/config/routing/article.yml"
+    prefix:   /article
+
+# Liste des commandes    
+e_shop_admin_commande:
+    path:   /commande
+    defaults: {_controller:EShopAdminBundle:Default:commande}
+
+# Gestion de la bascule de l'état de la commande
+e_shop_admin_basculer:
+    path:   /basculer
+    defaults: {_controller:EShopAdminBundle:Default:basculer}
+    requirements:
+        method: "POST"
+    

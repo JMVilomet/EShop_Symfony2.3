@@ -1,0 +1,32 @@
+{% extends '::base.html.twig'%}
+
+{% block title %}{{parent()}} - Récapitulatif{% endblock %}
+
+{# Ajout d'un écouteur sur le click du bouton pour retourner à l'accueil #}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    $(document).ready(function(){
+        $('#retourCatalogue').click(function(){window.location.href = '{{path('e_shop_boutique_retourAccueil')}}';return false;});
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div id="content" class="col-md-12">
+        <h2>Merci de votre confiance</h2>
+        <p class="importantText">Voici le contenu de votre commande n°{{commandeId}}:</p>
+        {% include 'EShopBoutiqueBundle:Default:panier.include.html.twig' %}    
+        <p class="orderTotal">Total de votre commande&nbsp;: <span id="total">{{panier_total|number_format(2, ',', ' ')}}</span>&nbsp;€&nbsp;TTC</p>
+        <p class="importantText">à Bientôt</p>
+        <div class="row">
+            <div class="col-xs-hide col-md-5"></div>
+            <div class="col-md-2">
+                <button id="retourCatalogue" class="button buttonBig"><i class="back_icon"></i>Retour à l'accueil</button>
+            </div>
+            <div class="col-xs-hide col-md-5"></div>
+        </div>
+        <p class="noteText">Vous allez recevoir sous peu un email de confirmation de votre commande.</p>        
+    </div>
+{% endblock %}
+

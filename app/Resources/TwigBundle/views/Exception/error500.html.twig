@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+{% block content %}
+
+    <div id="content" class="col-xs-12 col-md-8 col-lg-9">
+        {# Contenu #}
+        <h2>Aïe!</span></h2>
+        <p class="importantText">Un horrible 500.</p>
+        <p></p>
+        <p>J'espère que la base de données est en ligne et correctement remplie...</p>
+        <p>Détail : ({{ status_code }}) {{ status_text }}</p>
+        <p>Et si nous reprenions depuis le <a href="{{path("e_shop_boutique_accueil")}}">début ?</a></p>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

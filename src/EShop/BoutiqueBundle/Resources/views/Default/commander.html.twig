@@ -1,0 +1,97 @@
+{# 
+  This file is part of the EShop application.
+ 
+  (c) Jean-Michel VILOMET <jmvilomet@faeryscape.com>
+ 
+  For the full copyright and license information, please view the LICENSE.txt
+  file that was distributed with this source code.
+#}
+
+{% extends '::base.html.twig'%}
+
+{% block title %}{{parent()}} - Votre panier{% endblock %}
+
+{# surcharge de la présentation du formulaire pour compatibilité Bootstrap #}
+{% form_theme form _self %}
+{% block form_row %}
+<div class="form-group">
+{{form_label(form)}}
+{{form_errors(form)}}
+{{form_widget(form)}}
+</div>
+{%- endblock form_row %}
+
+{# Utilisation d'une librairie tierce pour la validation du formulaire #}
+{% block javascripts %}
+    {{ parent() }}
+    {# jqueryvalidation.org #}
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/localization/messages_fr.js"></script>
+    <script>
+    $(document).ready(function(){
+    {# gestion des clics sur bouton valider et retour catalogue #}    
+        $('#retourCatalogue').click(function(){window.location.href = '{{path('e_shop_boutique_accueil')}}';return false;});
+        $('#validerCommande').click(function(){
+            if($(".lignePanier").length==0){
+                $('#defaultModal').modal();
+            }else{
+                $("#orderForm").submit();
+            }
+            return false;
+        });
+    {# règles de validation du formulaire #}    
+        $("#orderForm").validate({
+            rules: {
+                "form[email]":         {required:true, email:true},
+                "form[nom]":           {required:true},
+                "form[prenom]":        {required:true},
+                "form[adresse]":       {required:true},
+                "form[cp]":            {required:true, rangelength: [5,5], number:true},
+                "form[ville]":         {required:true},
+                "form[departement]":   {required:true},
+            },
+            messages: {
+                "form[cp]":            {number:"Veuillez fournir un code à 5 chiffres", rangelength:"Veuillez fournir un code à 5 chiffres" }
+            }
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div id="content" class="col-md-12">
+        <h2>Votre commande</h2>
+        <p class="importantText">Voici le contenu de votre panier :</p>
+        {% include 'EShopBoutiqueBundle:Default:panier.include.html.twig' %}    
+        <p class="orderTotal">Total de votre commande&nbsp;: <span id="total">{{panier_total|number_format(2, ',', ' ')}}</span>&nbsp;€&nbsp;TTC</p>
+        <p class="importantText">Veuillez entrer vos coordonnées :</p>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-4">
+              {# affichage du formulaire de saisie de coordonnées  #}    
+              <form id="orderForm" novalidate action="{{path('e_shop_boutique_commander')}}" method="post" {{ form_enctype(form) }}>
+              {{ form_widget(form,{'attr':{'class': ''}}) }}
+              </form>
+            </div>
+            <div class="col-md-7">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-hide col-md-4"></div>
+            <div class="col-md-2">
+                <button id="retourCatalogue" class="button buttonBig"><i class="back_icon"></i>Retour</button>
+            </div>
+            <div class="col-md-2">
+                <button id="validerCommande" class="button buttonBig"><i class="confirm_icon"></i>Validation</button>
+            </div>
+            <div class="col-xs-hide col-md-4"></div>
+        </div>
+        <br/>
+    </div>
+{% endblock %}
+
+{# message de la popin modale en cas de panier vide #}
+{% block modalMessage %}
+<p>Votre panier est vide. Ajoutez au moins un article pour pouvoir finaliser la commande.</p>
+{% endblock %} 

@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+{% block content %}
+{{ status_code }}{{ status_text }}
+    <div id="content" class="col-xs-12 col-md-8 col-lg-9">
+        {# Contenu #}
+        <h2>Aïe!</span></h2>
+        <p class="importantText">Un malheureux 404.</p>
+        <p></p>
+        <p>Je ne vois vraiment pas comment vous amener à cette URL...</p>
+        <p>Détail : ({{ status_code }}) {{ status_text }}</p>
+        <p>Et si nous reprenions depuis le <a href="{{path("e_shop_boutique_accueil")}}">début ?</a></p>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

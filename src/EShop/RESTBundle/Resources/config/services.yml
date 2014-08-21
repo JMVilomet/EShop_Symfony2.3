@@ -1,0 +1,7 @@
+parameters:
+#    e_shop_rest.example.class: EShop\RESTBundle\Example
+
+services:
+#    e_shop_rest.example:
+#        class: %e_shop_rest.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
