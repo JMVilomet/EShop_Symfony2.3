@@ -1,0 +1,37 @@
+---------------------------
+Guide de démarrage rapide :
+---------------------------
+
+I - Installer Symfony 2.3 avec Composer :
+----------------------------------------
+composer create-project symfony/framework-standard-edition ./ 2.3.0
+
+
+II - Installer EShop
+--------------------
+git clone https://github.com/JMVilomet/EShop_Symfony2.3.git
+xcopy EShop_Symfony2.3\*.* .\ /Y /E
+rmdir /S /Q EShop_Symfony2.3
+
+
+III - Mettre à jour les dépendances avec Composer :
+---------------------------------------------------
+composer update
+
+
+IV - Lancer la console de Symfony :
+---------------------------------
+Exécuter les commandes suivante :
+php app/console doctrine:database:create
+php app/console doctrine:schema:create
+
+
+V - Importer la base de démo :
+-------------------------------
+mysql <database> -u <user> -p < exportDB.sql
+
+
+VI - Effectuer les tests unitaire :
+------------------------------------
+phpunit -c app src\EShop
+
